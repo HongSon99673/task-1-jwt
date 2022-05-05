@@ -8,6 +8,7 @@ import com.example.demo.model.ERole;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.sercurity.jwt.JwtProvider;
+import com.example.demo.sercurity.userprincal.UserDetailService;
 import com.example.demo.sercurity.userprincal.UserPrinciple;
 import com.example.demo.service.impl.RoleServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
@@ -19,10 +20,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 @CrossOrigin("*")
 @RestController
@@ -79,4 +83,12 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token,userPrinciple.getName(), userPrinciple.getAuthorities()));
 
     }
+    
+
+    @GetMapping("/list")
+    public List<User> List() {
+    	return userService.list();
+
+    }  
+    
 }
